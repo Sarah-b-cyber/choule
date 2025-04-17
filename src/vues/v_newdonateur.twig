@@ -1,0 +1,64 @@
+{% extends "base.twig" %}
+
+{% block title %}Enregistrer un Nouveau Donateur{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-lg rounded-4 p-5">
+        <h2 class="text-center text-primary fw-bold mb-4">Ajouter un Nouveau Donateur</h2>
+
+        <form action="index.php?uc=newdonateur" method="post" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom</label>
+                <input type="text" name="name" id="name" class="form-control" required placeholder="Saisissez le nom du donateur">
+                <div class="invalid-feedback">Le champ Nom est obligatoire.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" name="prenom" id="prenom" class="form-control" required placeholder="Saisissez le prénom du donateur">
+                <div class="invalid-feedback">Le champ Prénom est obligatoire.</div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Enregistrer le Donateur</button>
+            </div>
+        </form>
+
+        {% if message %}
+        <div class="alert alert-success mt-3">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-danger mt-3">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="mt-3">
+            <a href="index.php?uc=admin" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Script de validation Bootstrap pour une meilleure UX
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+{% endblock %}

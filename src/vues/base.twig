@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Oratoire du Palais{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Lien vers le fichier CSS personnalisé -->
+    <link rel="stylesheet" href="src/styles/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container-fluid nav-container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{{ path_index }}">
+                <img src="src/image/logo.jpg" alt="Oratoire du Palais" class="logo">
+            </a>
+
+            <!-- Bouton pour mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Liens de navigation -->
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="index.php?uc=oratoire">Oratoire</a></li>
+                 <li class="nav-item"><a class="nav-link" href="index.php?uc=horaire">Horaires</a></li>
+                 <li class="nav-item"><a class="nav-link" href="index.php?uc=activites">Activités</a></li>
+                 <li class="nav-item"><a class="nav-link" href="index.php?uc=collel">Collel</a></li>
+            </ul>
+               <!-- Connexion / Profil -->
+            <div class="d-flex align-items-center">
+         {% if session.role is defined and session.role is not empty %}
+            <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i> {{ session.prenom }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="index.php?uc=profil"><i class="fas fa-user-circle"></i> Voir mon profil</a></li>
+                
+                {% if session.role is defined and session.role == 'admin' %}
+                    <li><a class="dropdown-item text-danger" href="index.php?uc=admin"><i class="fas fa-home"></i> Accueil Admin</a></li>
+                {% else %}
+                    <li><a class="dropdown-item text-danger" href="index.php?uc=accueilfid"><i class="fas fa-home"></i> Accueil Fidèle</a></li>
+                {% endif %}
+                
+                <li><a class="dropdown-item text-danger" href="index.php?uc=deconnexion"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+            </ul>
+        </div>
+        {% else %}
+             <a href="index.php?uc=connexion" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Connexion
+        </a>
+         {% endif %}
+            </div>
+                </div>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script pour vérifier et initialiser Bootstrap Dropdowns -->
+    <script>
+      document.querySelector("#dropdownMenuButton").addEventListener("click", function (event) {
+    event.stopPropagation();  // Empêche un autre script de bloquer
+    event.stopImmediatePropagation();  // Force le dropdown à fonctionner
+    event.preventDefault(); // Désactive l'effet bloquant
+
+    console.log("Force ouverture dropdown !");
+    let dropdown = new bootstrap.Dropdown(this);
+    dropdown.toggle(); // Force l'ouverture
+});
+
+    </script>
+
+</body>
+</html> 

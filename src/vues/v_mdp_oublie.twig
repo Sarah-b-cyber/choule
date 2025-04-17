@@ -1,0 +1,40 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header text-center bg-white border-bottom">
+                <h3 class="text-uppercase" style="color: var(--blue-dark);">Mot de passe oublié</h3>
+            </div>
+            <div class="card-body">
+                {% if message %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+
+                {% if erreurs is defined and erreurs|length > 0 %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for erreur in erreurs %}
+                                <li>{{ erreur }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <form method="post" action="">
+                    <div class="mb-3">
+                        <label class="form-label">Votre adresse e-mail</label>
+                        <input type="email" class="form-control" name="email" required placeholder="Entrez votre email">
+                    </div>
+                    <button class="btn w-100 text-white" style="background: var(--gold);">Envoyer</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a href="index.php?uc=connexion" class="text-decoration-none text-primary">Retour à la connexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

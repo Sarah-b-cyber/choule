@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+
+{% block title %}Inscription réussie{% endblock %}
+
+{% block content %}
+    <div style="text-align: center; padding: 50px;">
+        <p class="message" style="font-size: 18px; color: green;">{{ message }}</p>
+        <p>Redirection en cours...</p>
+    </div>
+
+    <script>
+        setTimeout(() => { window.location.href = "{{ redirect_url }}"; }, 6000);
+    </script>
+{% endblock %}

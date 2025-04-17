@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrateur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css">
+    <style>
+/* Couleurs principales */
+/* Couleurs principales */
+:root {
+    --gold: #FFC107; /* Jaune utilisé dans la connexion */
+    --blue-dark: #1B1F3B;
+    --blue-light: #4A90E2;
+    --white: #FFFFFF;
+    --grey-light: #F5F5F5;
+    --grey-dark: #343A40;
+    --border-radius: 30px;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.25);
+    --highlight: #F4A300; /* Couleur d'accent */
+}
+/* Global Styling */
+body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh; /* Assure que le body occupe toute la hauteur de l'écran */
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--grey-light);
+    margin: 0;
+    padding: 0;
+    color: var(--grey-dark);
+    line-height: 1.6;
+}
+.container {
+    width: 80%;
+}
+h1, h3 {
+    font-weight: 700;
+}
+h1 {
+    color: var(--blue-dark);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+h3 {
+    color: var(--blue-light);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+/* Action Bar Styling */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.d-flex a {
+    border-radius: var(--border-radius);
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+.d-flex a:hover {
+    transform: translateY(-5px);
+}
+.d-flex .btn-primary {
+    background-color: var(--blue-light);
+    border: none;
+    color: var(--white);
+}
+.d-flex .btn-primary:hover {
+    background-color: var(--blue-dark);
+}
+.d-flex .btn-warning {
+    background-color: var(--gold);
+    border: none;
+    color: var(--white);
+}
+.d-flex .btn-warning:hover {
+    background-color: var(--highlight);
+}
+/* Table Styling */
+.table-responsive {
+    box-shadow: 0 10px 30px var(--shadow-light);
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 50px;
+    transition: transform 0.3s ease;
+}
+.table-responsive:hover {
+    transform: translateY(-5px);
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+.table th,
+.table td {
+    padding: 15px 20px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+    border-bottom: 1px solid #E9ECEF;
+    transition: background-color 0.3s ease;
+}
+.table th {
+    background-color: var(--blue-dark);
+    color: var(--white);
+}
+.table tbody tr {
+    background-color: var(--white);
+}
+.table tbody tr:nth-child(even) {
+    background-color: #F9F9F9;
+}
+.table tbody tr:hover {
+    background-color: #F1F1F1;
+}
+.table .badge {
+    font-size: 0.875rem;
+    padding: 6px 12px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+.table .badge.bg-success {
+    background-color: #28A745;
+}
+.table .badge.bg-warning {
+    background-color: var(--gold);
+}
+.table td a {
+    font-size: 1.2rem;
+    color: var(--blue-light);
+    transition: color 0.3s ease, transform 0.2s ease;
+    margin: 0 10px;
+}
+.table td a:hover {
+    color: var(--blue-dark);
+    transform: scale(1.1);
+}
+.table td a.text-danger {
+    color: #DC3545;
+}
+.table td a.text-danger:hover {
+    color: #C82333;
+}
+/* Pagination Styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.pagination .page-link {
+    background-color: var(--blue-light);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.pagination .page-item.active .page-link {
+    background-color: var(--blue-dark);
+    border-color: var(--blue-dark);
+}
+.pagination .page-link:hover {
+    background-color: var(--blue-dark);
+    transform: translateY(-3px);
+}
+.pagination .page-item.active .page-link:hover {
+    background-color: var(--highlight);
+}
+/* Small Screen Adjustments */
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .d-flex a {
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    .table th, .table td {
+        padding: 12px 15px;
+    }
+}
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <!-- Titre principal de la page -->
+    <h1 class="text-center fw-bold mb-4" style="color: var(--blue-dark);">Panel Administrateur</h1>
+    <!-- Barre d'actions avec boutons -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="text-secondary" style="color: var(--blue-light);">Liste des dons</h3>
+        <div>
+            <a href="index.php?uc=admin&action=add_don" class="btn btn-sm btn-primary me-2" style="border-radius: 30px; padding: 8px 20px; transition: transform 0.3s ease;">
+                <i class="fas fa-plus-circle"></i> Ajouter
+            </a>
+            <a href="index.php?uc=admin&action=export_excel" class="btn btn-sm btn-warning" style="border-radius: 30px; padding: 8px 20px; transition: transform 0.3s ease;">
+                <i class="fas fa-file-export"></i> Exporter Excel
+            </a>
+        </div>
+    </div>
+    <!-- Tableau des dons -->
+    <div class="table-responsive shadow-lg p-3 mb-5 bg-white rounded">
+        <table class="table table-sm table-hover align-middle text-center">
+            <thead class="table-light" style="background-color: var(--blue-dark); color: var(--white);">
+                <tr class="small">
+                    <th>#</th>
+                    <th>Donateur</th>
+                    <th>Montant (€)</th>
+                    <th>Paiement</th>
+                    <th>Date</th>
+                    <th>Mitsva</th>
+                    <th>Raison</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="don-list">
+                <!-- Les dons seront insérés ici avec JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    // Exemple de données des dons (en remplacement de Twig)
+    const dons = [
+        {id: 1, name: "Jean", prenom: "Dupont", amount: 100, payment_method: "Carte", date_validation: "2025-03-20", mitsva: "Charité", raison: "Don pour l'église", status: "validé"},
+        {id: 2, name: "Marie", prenom: "Durand", amount: 50, payment_method: "Virement", date_validation: "2025-03-19", mitsva: "Soutien", raison: "Don pour les pauvres", status: "en attente"}
+    ];
+    // Fonction pour afficher les dons
+    function renderDons() {
+        const donList = document.getElementById('don-list');
+        donList.innerHTML = '';
+        if (dons.length === 0) {
+            donList.innerHTML = '<tr><td colspan="9" class="text-muted">Aucun don enregistré.</td></tr>';
+        } else {
+            dons.forEach((don, index) => {
+                const row = document.createElement('tr');
+                row.classList.add('small');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${don.name} ${don.prenom}</td>
+                    <td><strong>${don.amount.toFixed(2).replace('.', ',')} €</strong></td>
+                    <td>${don.payment_method}</td>
+                    <td>${don.date_validation}</td>
+                    <td>${don.mitsva}</td>
+                    <td>${don.raison}</td>
+                    <td>
+                        <span class="badge ${don.status === 'validé' ? 'bg-success' : 'bg-warning text-dark'}">${don.status === 'validé' ? 'Validé' : 'En attente'}</span>
+                    </td>
+                    <td>
+                        <a href="index.php?uc=admin&action=edit_don&id=${don.id}" class="text-primary me-2" title="Modifier">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                        <a href="#" class="text-danger" title="Supprimer" onclick="confirmDelete(${don.id})">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                `;
+                donList.appendChild(row);
+            });
+        }
+    }
+    // Fonction de confirmation avant suppression
+    function confirmDelete(donId) {
+        const confirmAction = confirm('Êtes-vous sûr de vouloir supprimer ce don ?');
+        if (confirmAction) {
+            // Suppression du don (ici, il faudrait intégrer la logique de suppression côté serveur)
+            alert('Don supprimé !');
+        }
+    }
+    // Appel initial pour afficher les dons
+    renderDons();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+{% extends "base.twig" %}
+
+{% block title %}Faire un Don{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 80px;">
+    <h2 class="text-center">Faire un Nouveau Don</h2>
+
+    {% if erreurs is defined and erreurs|length > 0 %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for erreur in erreurs %}
+                    <li>{{ erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form action="index.php?uc=dons&action=traiter" method="post">
+        <div class="mb-3">
+            <label for="montant" class="form-label">Montant du Don (€)</label>
+            <input type="number" class="form-control" id="montant" name="montant" required min="1">
+        </div>
+
+        <div class="mb-3">
+                <label for="Mitsva" class="form-label">Mitsva </label>
+                <input type="text" step="0.01" name="mitsva" id="mitsva" class="form-control" required>
+        </div>
+
+         <div class="mb-3">
+                <label for="Raison" class="form-label">Raison </label>
+                <input type="text" step="0.01" name="raison" id="raison" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" name="date" id="date" class="form-control" >
+        </div>
+
+
+      <div class="mb-3">
+                <label for="methode" class="form-label">Méthode de paiement</label>
+                <input type="text" name="methode" id="methode" class="form-control" >
+            </div> 
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a href="index.php?uc=accueilfid" class="btn btn-secondary">Retour</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+

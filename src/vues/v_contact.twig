@@ -1,0 +1,59 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+{% set retour_link = "index.php?uc=accueilfid" %}
+<section class="container py-5" style="background-color: #f9f9f9;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0" style="border-radius: 15px; background: linear-gradient(135deg, #ffffff 0%, #f1f1f1 100%);">
+                <div class="card-header text-center py-4" style="background: transparent; color: #333;">
+                    <h2 class="fw-bold mb-2">Nous Contacter</h2>
+                    <p class="mb-0 text-muted">Remplissez le formulaire ci-dessous et nous reviendrons vers vous rapidement.</p>
+                    <a href="{{ retour_link }}" class="text-primary text-decoration-none d-inline-block mt-3">
+                        <i class="fas fa-arrow-left"></i> Retour à l'accueil
+                    </a>
+                </div>
+                
+                <div class="card-body p-4">
+                    <form action="index.php?uc=contact&action=envoyer" method="post">
+                        <div class="row">
+                            <!-- Prénom -->
+                            <div class="col-md-6 mb-4">
+                                <label for="first_name" class="form-label">Prénom</label>
+                                <input type="text" id="first_name" name="first_name" class="form-control shadow-sm" placeholder="Votre prénom" required>
+                            </div>
+                            <!-- Nom -->
+                            <div class="col-md-6 mb-4">
+                                <label for="last_name" class="form-label">Nom</label>
+                                <input type="text" id="last_name" name="last_name" class="form-control shadow-sm" placeholder="Votre nom" required>
+                            </div>
+                        </div>
+                        <!-- Téléphone -->
+                        <div class="mb-4">
+                            <label for="phone" class="form-label">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" class="form-control shadow-sm" pattern="^\+?[0-9]{10,15}$" placeholder="Ex: +33 6 12 34 56 78" required>
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Adresse e-mail</label>
+                            <input type="email" id="email" name="email" class="form-control shadow-sm" placeholder="exemple@domaine.com" required>
+                        </div>
+                        <!-- Description du problème -->
+                        <div class="mb-4">
+                            <label for="problem_description" class="form-label">Message</label>
+                            <textarea id="problem_description" name="problem_description" class="form-control shadow-sm" rows="5" placeholder="Expliquez votre demande" required></textarea>
+                        </div>
+                        <!-- Bouton d'envoi -->
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-lg" style="background: linear-gradient(135deg, #ffd700, #ffcc00); color: #003366; font-weight: bold; border-radius: 8px; border: 2px solid #ffcc00; transition: background-color 0.3s ease, transform 0.3s ease;">
+                         Envoyer la demande
+                        </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

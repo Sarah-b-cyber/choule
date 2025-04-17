@@ -1,0 +1,64 @@
+{% extends "base.twig" %}
+
+{% block title %}Accueil Fidèle{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Bienvenue </h2>
+    <p class="text-muted">Accédez rapidement à vos informations et services.</p>
+    
+    <div class="row mt-4">
+        <!-- Voir mes promesses de dons -->
+        <div class="col-md-4">
+            <a href="index.php?uc=dons&action=afficher" class="card-link">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded animate-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-hand-holding-heart fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Mes promesses de dons</h5>
+                        <p class="card-text text-muted">Consultez l'historique de vos dons et engagements.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Mon profil -->
+        <div class="col-md-4">
+            <a href="index.php?uc=profil" class="card-link">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded animate-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Mon profil</h5>
+                        <p class="card-text text-muted">Visualisez et mettez à jour vos informations personnelles.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Contacter un administrateur -->
+        <div class="col-md-4">
+            <a href="index.php?uc=contact" class="card-link">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded animate-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-envelope fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">Contacter un administrateur</h5>
+                        <p class="card-text text-muted">Besoin d'aide ? Envoyez un message directement.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-link {
+        text-decoration: none;
+    }
+    .animate-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .animate-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock %}

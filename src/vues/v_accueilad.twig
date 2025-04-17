@@ -1,0 +1,120 @@
+{% extends "base.twig" %}
+
+{% block title %}Panel Administrateur{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-dark">Panel Administrateur</h1>
+        <p class="text-muted">Gérez les dons et accédez à des actions administratives en toute simplicité</p>
+    </div>
+
+    <div class="card shadow rounded-3 p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-primary">Liste des dons</h3>
+            <div>
+                <a href="index.php?uc=admin2&action=add_don" class="btn btn-primary btn-sm me-2 align-items-center">
+                    <i class="fas fa-plus-circle me-1"></i> Ajouter un don
+                </a>
+                <a href="index.php?uc=admin2&action=export_excel" class="btn btn-outline-warning btn-sm  align-items-center">
+                    <i class="fas fa-file-export me-1"></i> Exporter Excel
+                </a>
+            </div>
+        </div>
+
+        <form method="get" action="index.php" class="input-group mb-4 shadow-sm">
+            <input type="hidden" name="uc" value="admin2">
+            <input type="hidden" name="action" value="search_donateur">
+            <input type="text" name="search_term" class="form-control" 
+                   placeholder="Rechercher un donateur par nom ou prénom" 
+                   value="{{ app.request.get('search_term') | e }}" aria-label="Recherche">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fas fa-search"></i> Rechercher
+            </button>
+        </form>
+
+        <div class="d-flex flex-column mb-4">
+            <a class="btn btn-outline-secondary text-start d-flex align-items-center mb-2" href="index.php?uc=admin">
+                <i class="fas fa-home me-2 text-primary"></i> Retour à l'accueil
+            </a>
+            <a class="btn btn-outline-danger text-start d-flex align-items-center" href="index.php?uc=admin2">
+                <i class="fas fa-hand-holding-heart me-2 text-danger"></i> Voir l'ensemble des dons
+            </a>
+        </div>
+        <div id="test" style="position:fixed; top:70px; left:10px ; width:100vw; height:100vh; background-color:white; display:none; z-index:1000;">
+    <div id="form-container" style="padding:20px;"></div>
+</div>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-hover table-bordered text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Donateur</th>
+                        <th>Montant (€)</th>
+                        <th>Paiement</th>
+                        <th>Date</th>
+                        <th>Mitsva</th>
+                        <th>Raison</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for don in dons %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ don.name | e }} {{ don.prenom | e }}</td>
+                            <td><span class="fw-bold text-success">{{ don.amount | number_format(2, ',', ' ') }} €</span></td>
+                            <td>{{ don.payment_method }}</td>
+                            <td>{{ don.date_validation | e }}</td>
+                            <td>{{ don.mitsva }}</td>
+                            <td>{{ don.raison }}</td>
+                            <td>
+                                {% if don.status == 'validé' %}
+                                    <span class="badge bg-success">✔ Validé</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">⌛ En attente</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                            <!-- index.php?uc=admin2&action=edit_don&id={{ don.id }}-->
+                                <a href="javascript:;" onclick="getform({{ don.id }})" class="text-primary me-2" title="Modifier">
+                                    <i class="fas fa-pen"></i></a>
+                                <a href="index.php?uc=admin2&action=delete_don&id={{ don.id }}" class="text-danger" title="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce don ?');">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9" class="text-muted">Aucun don enregistré.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+//$("#test").load('index.php?uc=admin2&action=edit_don&id=385');<>
+function getform(id){
+    $("#test").load('index.php?uc=admin2&action=edit_don&id='+id); 
+    $("#test").fadeIn( "slow", function() {
+    // Animation complete.
+  });
+
+}
+function closeForm(){
+    $("#test").fadeOut("slow");
+}
+  /*
+    setTimeout(() => {
+         $("#test").fadeOut( "slow", function() {
+    // Animation complete.
+  });
+    }, 2000);*/
+
+</script>
+{% endblock %}

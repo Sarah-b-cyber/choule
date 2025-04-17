@@ -1,0 +1,64 @@
+{% extends "base.twig" %}
+
+{% block title %}Accueil administrateur{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Bienvenue </h2>
+    <p class="text-muted">Accédez rapidement aux différents services.</p>
+    
+    <div class="row mt-4">
+        <!-- Voir mes promesses de dons -->
+        <div class="col-md-4">
+            <a href="index.php?uc=admin2" class="card-link">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded animate-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-hand-holding-heart fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Ensembles des dons</h5>
+                        <p class="card-text text-muted">Gérez l'historique de tout les dons .</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Nouveau donateur -->
+        <div class="col-md-4">
+            <a href="index.php?uc=newdonateur" class="card-link">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded animate-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Nouveau donateur</h5>
+                        <p class="card-text text-muted">Ajoutez et mettez à jour les donateurs.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Importez les horaires-->
+        <div class="col-md-4">
+            <a href="index.php?uc=horaire" class="card-link">
+                <div class="card shadow-lg p-3 mb-5 bg-white rounded animate-card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">Importez les horaires </h5>
+                        <p class="card-text text-muted">Mettez a jour les horaires .</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-link {
+        text-decoration: none;
+    }
+    .animate-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .animate-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock %}

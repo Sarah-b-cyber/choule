@@ -1,0 +1,75 @@
+{% extends "base.twig" %} 
+
+{% block title %}Mes Promesses de Dons{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+              <!-- Lien de retour à l'accueil -->
+        <div class="mb-3">
+            <a href="index.php?uc=accueilfid" class="text-primary text-decoration-none">
+                <i class="fas fa-arrow-left"></i> Retour à l'accueil
+            </a>
+        </div>
+        <h1 class="text-center text-dark fw-bold mb-4">Mes Promesses de Dons</h1>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Montant (€)</th>
+                        <th>Méthode de paiement</th>
+                        <th>Statut</th>
+                        <th>Mitsva</th>
+                        <th>Raison</th>
+                        <th>Date de validation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if promesses is empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted"> Aucune promesse de don pour le moment.</td>
+                        </tr>
+                    {% else %}
+                        {% for don in promesses %}
+                            <tr>
+                                <td class="fw-bold">{{ don.amount | e }} €</td>
+                                <td class="text-capitalize">{{ don.payment_method | e }}</td>
+                                <td>
+                                    {% if don.status == 'validé' %}
+                                        <span class="badge bg-success">✔ Validé</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">⌛ En attente</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ don.mitsva }}</td>
+                                <td>{{ don.raison }}</td>
+                                <td>{{ don.date_validation | date("d/m/Y") }}</td>
+                                <td>
+                                    {% if don.status == 'en attente' %}
+                                        <a href="https://www.consistoire.org/don/" target="_blank" 
+                                           class="btn-regler">
+                                            <i class="bi bi-credit-card"></i> Régler
+                                        </a>
+                                    {% else %}
+                                        <button class="btn-deja-regle">
+                                            ✅ Déjà payé
+                                        </button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="index.php?uc=dons&action=nouveau" class="btn-promesse">
+                ➕ Faire une Promesse de Don
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

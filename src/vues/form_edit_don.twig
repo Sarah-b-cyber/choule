@@ -1,0 +1,43 @@
+{% extends "base.twig" %}
+
+{% block title %}Modifier un Don{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow-sm p-4 border border-secondary rounded-3" style="max-width: 600px; width: 100%;">
+        <h2 class="text-center text-dark fw-semibold mb-3">Modifier le Don</h2>
+
+        <form method="POST" action="index.php?uc=admin2&action=edit_don&id={{ don.id }}">
+            <div class="mb-2">
+                <label class="form-label">Nom</label>
+                <input type="text" name="nom" class="form-control" value="{{ don.nom }}" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Prénom</label>
+                <input type="text" name="prenom" class="form-control" value="{{ don.prenom }}" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Montant (€)</label>
+                <input type="number" name="montant" class="form-control" step="0.01" value="{{ don.amount }}" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Date</label>
+                <input type="date" name="date" class="form-control" value="{{ don.date_validation|date('Y-m-d') }}" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Statut</label>
+                <select name="status" class="form-control" required>
+                  <option value="en attente" {% if don.status == 'en attente' %}selected{% endif %}>En attente</option>
+                  <option value="validé" {% if don.status == 'validé' %}selected{% endif %}>Validé</option>
+                    
+                </select>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary btn-sm">Modifier</button>
+                <a href="index.php?uc=admin2" class="btn btn-secondary btn-sm">Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

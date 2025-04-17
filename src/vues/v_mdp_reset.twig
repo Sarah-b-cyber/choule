@@ -1,0 +1,27 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mt-5">Réinitialisation du mot de passe</h2>
+
+    {% if erreur %}
+        <div class="alert alert-danger">{{ erreur }}</div>
+    {% endif %}
+
+    <form action="index.php?uc=mdp_reset" method="post" class="mt-4">
+        <!-- Champs cachés pour email & token -->
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="token" value="{{ token }}">
+
+        <div class="mb-3">
+            <label for="new_password" class="form-label">Nouveau mot de passe</label>
+            <input type="password" id="new_password" name="new_password" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Confirmez le mot de passe</label>
+            <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Réinitialiser</button>
+    </form>
+</div>
+{% endblock %}

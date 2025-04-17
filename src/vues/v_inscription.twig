@@ -1,0 +1,53 @@
+{% extends "base.twig" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Inscription</h2>
+
+    {% if erreurs %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for erreur in erreurs %}
+                    <li>{{ erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form action="{{ path_inscription }}" method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nom :</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="prenom" class="form-label">Prénom :</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="login" class="form-label">Identifiant :</label>
+            <input type="text" class="form-control" id="login" name="login" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="login" class="form-label">Email:</label>
+            <input type="text" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="mdp" class="form-label">Mot de passe :</label>
+            <input type="password" class="form-control" id="mdp" name="mdp" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="confirm_mdp" class="form-label">Confirmer le mot de passe :</label>
+            <input type="password" class="form-control" id="confirm_mdp" name="confirm_mdp" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+</div>
+{% endblock %}

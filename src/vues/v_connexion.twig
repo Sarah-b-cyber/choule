@@ -1,0 +1,51 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh; margin-top: -50px;">
+    <div class="col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header text-center bg-white border-bottom">
+                <h3 class="text-uppercase" style="color: var(--blue-dark);">Connexion</h3>
+            </div>
+            <div class="card-body">
+                {% if erreurs is defined and erreurs|length > 0 %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for erreur in erreurs %}
+                                <li>{{ erreur }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <form role="form" method="post" action="{{ path_connexion }}">
+                    <div class="mb-3">
+                        <label class="form-label">Login</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="glyphicon glyphicon-user"></i></span>
+                            <input class="form-control" placeholder="Entrez votre login" name="login" type="text" maxlength="45" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mot de passe</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" placeholder="Entrez votre mot de passe" name="mdp" type="password" maxlength="45" required>
+                        </div>
+                    </div>
+                    <button class="btn w-100 text-white" style="background: var(--gold);">Se connecter</button>
+
+                    <!-- Lien pour réinitialiser le mot de passe -->
+                    <div class="text-center mt-3">
+                        <a href="index.php?uc=mdp_oublie" class="text-decoration-none text-primary">Mot de passe oublié ?</a>
+                    </div>
+                       <!-- Lien pour réinitialiser le mot de passe -->
+                    <div class="text-center mt-3">
+                        <a href="index.php?uc=inscription" class="text-decoration-none text-primary">Créer un compte</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
